@@ -1,0 +1,14 @@
+node_modules
+dist
+.vscode
+build
+cli
+*.sw*
+*.js
+*.wasm
+*.wat
+*.bat*
+debug.ts
+debug2.ts
+!webpack.config.js
+*.py
