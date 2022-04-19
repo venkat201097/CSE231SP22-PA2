@@ -142,6 +142,9 @@ export function traverseStmt(c : TreeCursor, s : string) : Stmt<null> {
   switch(c.node.type.name) {
     case "AssignStatement":
       c.firstChild(); // name
+        if(c.type.name!=='VariableName'){
+          throw new Error("ParseError: Could not parse id at " + c.node.from + ":" + c.node.to + ": " + s.substring(c.from, c.to));
+        }
         const name = s.substring(c.from, c.to);
       c.nextSibling(); // =
       c.nextSibling(); // go to value
@@ -260,6 +263,9 @@ export function traverseLiteral(c : TreeCursor, s : string) : Literal<null> {
 
 export function traverseVarDef(c : TreeCursor, s : string) : VarDef<null> {
   c.firstChild(); // name
+    if(c.type.name!=='VariableName'){
+      throw new Error("ParseError: Could not parse id at " + c.node.from + ":" + c.node.to + ": " + s.substring(c.from, c.to));
+    }
     const name = s.substring(c.from, c.to);
   c.nextSibling(); // TypeDef
     c.firstChild(); // :
